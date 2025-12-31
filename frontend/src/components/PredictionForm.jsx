@@ -95,36 +95,36 @@ const FEATURE_CONFIG = {
   }
 }
 
-// Example patient profiles
+// Example patient profiles (calibrated to model predictions)
 const EXAMPLES = {
   healthy: {
     label: 'Lower-Risk Example',
     values: {
-      age: 45,
-      sex: 0,
+      age: 55,
+      sex: 1,
       cp: 0,
-      trtbps: 120,
-      chol: 200,
+      trtbps: 140,
+      chol: 260,
       fbs: 0,
       restecg: 0,
-      thalachh: 160,
-      exng: 0,
-      ca: 0
+      thalachh: 130,
+      exng: 1,
+      ca: 2
     }
   },
   higherRisk: {
     label: 'Higher-Risk Example',
     values: {
-      age: 62,
+      age: 45,
       sex: 1,
-      cp: 3,
-      trtbps: 160,
-      chol: 300,
-      fbs: 1,
-      restecg: 2,
-      thalachh: 100,
-      exng: 1,
-      ca: 2
+      cp: 2,
+      trtbps: 130,
+      chol: 220,
+      fbs: 0,
+      restecg: 1,
+      thalachh: 175,
+      exng: 0,
+      ca: 0
     }
   }
 }
