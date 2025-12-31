@@ -126,9 +126,18 @@ class HeartDiseaseModel:
 
         # Default data path
         if data_path is None:
-            # Look for data relative to this file or in common locations
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            data_path = os.path.join(current_dir, '..', '..', 'data', 'heart.csv')
+            # Try multiple locations for the data file
+            possible_paths = [
+                os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'heart.csv'),
+                '/app/data/heart.csv',  # Docker path
+                'data/heart.csv',  # Relative to working directory
+            ]
+            for path in possible_paths:
+                if os.path.exists(path):
+                    data_path = path
+                    break
+            else:
+                data_path = possible_paths[0]  # Default to first option
 
         self.data_path = data_path
 

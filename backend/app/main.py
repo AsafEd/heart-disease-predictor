@@ -24,8 +24,18 @@ from .schemas import (
 )
 
 # Check if we're in production (frontend built)
-FRONTEND_DIR = Path(__file__).parent.parent.parent / "frontend" / "dist"
-IS_PRODUCTION = FRONTEND_DIR.exists()
+# Try multiple possible locations for the frontend dist
+_possible_frontend_dirs = [
+    Path(__file__).parent.parent.parent / "frontend" / "dist",
+    Path("/app/frontend/dist"),  # Docker path
+    Path("frontend/dist"),  # Relative path
+]
+FRONTEND_DIR = None
+for _dir in _possible_frontend_dirs:
+    if _dir.exists():
+        FRONTEND_DIR = _dir
+        break
+IS_PRODUCTION = FRONTEND_DIR is not None and FRONTEND_DIR.exists()
 
 
 @asynccontextmanager
